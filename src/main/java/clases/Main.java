@@ -105,6 +105,7 @@ public class Main {
     	String autor = datos[3];
     	Integer paginas = Integer.parseInt(datos[4]);
     	
+    	//libro = new Libro();
     	
     	return libro;
     }
