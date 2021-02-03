@@ -23,7 +23,7 @@ public class Main {
 				alta(catalogo);
 				break;
 			case 2:
-				//TODO Lista de Libros
+				listarLibros(catalogo);
 				break;
 			default:
 				break;
@@ -75,6 +75,12 @@ public class Main {
     	//Meter el libro en el catalogo
     }
     
+    private static void listarLibros(ArrayList<Libro> catalogo) {
+    	for(int i = 0; i < catalogo.size(); i++) {
+    		  System.out.println(catalogo.get(i));
+    		}
+    }
+    
     private static String obtenerDatosLibro() {
     	String datos=null;
     	
@@ -105,7 +111,7 @@ public class Main {
     	String autor = datos[3];
     	Integer paginas = Integer.parseInt(datos[4]);
     	
-    	//libro = new Libro();
+    	libro = new Libro(titulo, isbn, genero, autor, paginas);
     	
     	return libro;
     }

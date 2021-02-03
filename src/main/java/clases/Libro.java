@@ -97,5 +97,12 @@ public class Libro {
 		this.paginas = paginas;
 	}
 	
+	/**
+	 * @return devuelve la siguiente cadena "Titulo ISBN Genero Autor Paginas".
+	 */
+	public String toString() {
+		return "Titulo: " + titulo + " ISBN: " + isbn +  " Genero: " + genero + " Autor: " + autor + " Paginas: " + paginas;
+	}
+	
 
 }
