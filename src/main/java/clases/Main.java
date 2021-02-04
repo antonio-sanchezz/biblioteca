@@ -25,6 +25,9 @@ public class Main {
 			case 2:
 				listarLibros(catalogo);
 				break;
+			case 3:
+				baja(catalogo);
+				break;
 			default:
 				break;
 			}
@@ -43,7 +46,7 @@ public class Main {
     		System.out.println("5. Ordenacion de Libros");
     		System.out.println("Introduce la opcion:");
     	
-    		opcion = leerOpcion(2);
+    		opcion = leerOpcion(5);
     		
     	}while(opcion <=0);
     	
@@ -76,13 +79,13 @@ public class Main {
     }
     
     private static void baja(ArrayList<Libro> catalogo) {
-    	//equals, comparable
     	Scanner teclado = new Scanner(System.in);
+    	System.out.println("¿Que libro quiere borrar? Indique el indice.");
     	int opcion = teclado.nextInt();
-    	for(int i = 0; i < catalogo.size(); i++) {
-    		// if == remove(int i)
-  		  //System.out.println(catalogo.get(i));
-  		}
+    	
+    	// Eliminamos el indice dado.
+    	catalogo.remove(opcion);
+
     }
     
     private static void buscarLibros(ArrayList<Libro> catalogo) {
@@ -98,7 +101,7 @@ public class Main {
     
     private static void listarLibros(ArrayList<Libro> catalogo) {
     	for(int i = 0; i < catalogo.size(); i++) {
-    		  System.out.println(i + "." + catalogo.get(i));
+    		  System.out.println(i + " - " + catalogo.get(i));
     		}
     }
     
@@ -132,8 +135,8 @@ public class Main {
     	String autor = datos[3];
     	Integer paginas = Integer.parseInt(datos[4]);
     	
-    	//Celestina:0-3538-1166-1:novela:Fernando:150
-    	//Odisea:0-4568-2116-2:novela:Homero:250
+    	// Celestina:0-3538-1166-1:novela:Fernando:150
+    	// Odisea:0-4568-2116-2:novela:Homero:250
     	libro = new Libro(titulo, isbn, genero, autor, paginas);
     	
     	return libro;
