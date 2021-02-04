@@ -1,6 +1,6 @@
 package clases;
 
-public class Libro {
+public class Libro implements Comparable {
 	
 	private String titulo;
 	private String isbn;
@@ -103,6 +103,35 @@ public class Libro {
 	public String toString() {
 		return "Titulo: " + titulo + " ISBN: " + isbn +  " Genero: " + genero + " Autor: " + autor + " Paginas: " + paginas;
 	}
+
+	@Override
+	public int compareTo(Object o) {// CompareTo ignore case
+
+		if(!(o instanceof Libro)) {
+			throw new ClassCastException("El objeto introducido no es valido");
+		} else {
+			Libro libro = (Libro) o;
+			// Titulo - Orden alfabetico, ignorar mayusculas y minusculas.
+			// Buscar un metodo para comparar de la clase String.
+		}
+		return 1;
+	}
 	
+	@Override
+	public boolean equals(Object o) {
+
+		boolean validador = false;
+
+		if(!(o instanceof Libro)) {
+			throw new ClassCastException("El objeto introducido no es valido");
+		} else {
+			Libro libro = (Libro) o;
+			// Comprobamos si los ISBN son iguales, ignorando mayusculas y minusculas.
+			if ((this.isbn).equalsIgnoreCase(libro.isbn)) {
+				validador = true;
+			}
+		}
+        return validador;
+	}
 
 }

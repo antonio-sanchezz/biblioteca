@@ -75,9 +75,30 @@ public class Main {
     	//Meter el libro en el catalogo
     }
     
+    private static void baja(ArrayList<Libro> catalogo) {
+    	//equals, comparable
+    	Scanner teclado = new Scanner(System.in);
+    	int opcion = teclado.nextInt();
+    	for(int i = 0; i < catalogo.size(); i++) {
+    		// if == remove(int i)
+  		  //System.out.println(catalogo.get(i));
+  		}
+    }
+    
+    private static void buscarLibros(ArrayList<Libro> catalogo) {
+    	// Mediante ISBN, puede haber varios libros con el mismo ISBN, tenerlo en cuenta a la hora de eliminarlo.
+    	// indexOf(Object o)
+    }
+    
+    private static void ordenarLibros(ArrayList<Libro> catalogo) {
+    	// catalogo.sort
+    	// 1. Titulo - Orden alfabetico, ignorar mayusculas y minusculas.
+    	// 2. Una vez hecho el primero, ordenar por numero de paginas. (compare(Object a, Object b))
+    }
+    
     private static void listarLibros(ArrayList<Libro> catalogo) {
     	for(int i = 0; i < catalogo.size(); i++) {
-    		  System.out.println(catalogo.get(i));
+    		  System.out.println(i + "." + catalogo.get(i));
     		}
     }
     
@@ -111,6 +132,8 @@ public class Main {
     	String autor = datos[3];
     	Integer paginas = Integer.parseInt(datos[4]);
     	
+    	//Celestina:0-3538-1166-1:novela:Fernando:150
+    	//Odisea:0-4568-2116-2:novela:Homero:250
     	libro = new Libro(titulo, isbn, genero, autor, paginas);
     	
     	return libro;
