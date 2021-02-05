@@ -85,6 +85,11 @@ public class Main {
 	}
 
 	private static void baja(ArrayList<Libro> catalogo) {
+		
+		// Mediante ISBN, puede haber varios libros con el mismo ISBN, tenerlo en cuenta
+		// a la hora de eliminarlo.
+		// indexOf(Object o)
+		
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("¿Que libro quiere borrar? Indique el indice.");
 		int opcion = teclado.nextInt();
@@ -94,11 +99,16 @@ public class Main {
 
 	}
 
+	/**
+	 * Nos permite buscar un libro en la biblioteca mediante el ISBN.
+	 * 
+	 * @param catalogo contiene toda la informacion de todos los libros introducidos
+	 */
 	private static void buscarLibros(ArrayList<Libro> catalogo) {
-		// Mediante ISBN, puede haber varios libros con el mismo ISBN, tenerlo en cuenta
-		// a la hora de eliminarlo.
-		// indexOf(Object o)
+
+		// Nos indicara que resultados coinciden con la busqueda (true).
 		boolean iguales = false;
+		// Nos indicara si se ha encontrado algun resultado (false);
 		boolean sinresultado = true;
 
 		Scanner teclado = new Scanner(System.in);
@@ -108,15 +118,18 @@ public class Main {
 		Libro libro = new Libro();
 		libro.setIsbn(opcion);
 
+		// Recorremos todo el catalogo buscando algun libro con el ISBN indicado.
 		for (int i = 0; i < catalogo.size(); i++) {
 			iguales = libro.equals(catalogo.get(i));
 
+			// Si son iguales lo/s mostramos por pantalla.
 			if (iguales) {
 				System.out.println(i + " - " + catalogo.get(i));
 				sinresultado = false;
 			}
 		}
 		
+		// Comprobamos si se ha obtenido algun resultado en la busqueda.
 		if (sinresultado) {
 			System.out.println("No hay ningun libro que coincida con ese ISBN.");
 		}
