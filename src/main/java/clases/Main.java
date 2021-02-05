@@ -99,6 +99,7 @@ public class Main {
 		// a la hora de eliminarlo.
 		// indexOf(Object o)
 		boolean iguales = false;
+		boolean sinresultado = true;
 
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("¿Que libro quiere buscar? Indique el ISBN.");
@@ -112,7 +113,12 @@ public class Main {
 
 			if (iguales) {
 				System.out.println(i + " - " + catalogo.get(i));
+				sinresultado = false;
 			}
+		}
+		
+		if (sinresultado) {
+			System.out.println("No hay ningun libro que coincida con ese ISBN.");
 		}
 	}
 
