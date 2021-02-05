@@ -4,6 +4,8 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -33,6 +35,9 @@ public class Main {
 			case 5:
 				ordenarLibros(catalogo);
 				break;
+			case 6:
+				librosDePrueba(catalogo);
+				break;
 			default:
 				break;
 			}
@@ -50,9 +55,10 @@ public class Main {
 			System.out.println("3. Baja de Libros");
 			System.out.println("4. Búsqueda de Libros");
 			System.out.println("5. Ordenacion de Libros");
+			System.out.println("6. Introducir Libros de prueba");
 			System.out.println("Introduce la opcion:");
 
-			opcion = leerOpcion(5);
+			opcion = leerOpcion(6);
 
 		} while (opcion <= 0);
 
@@ -71,6 +77,24 @@ public class Main {
 		}
 
 		return opcion;
+	}
+	
+	/**
+	 * Nos permite añadir algunos libros automaticamente para realizar pruebas.
+	 * 
+	 * @param catalogo catalogo contiene toda la informacion de todos los libros introducidos
+	 */
+	private static void librosDePrueba(ArrayList<Libro> catalogo) {
+		Libro libro;
+		
+		libro = new Libro("Celestina", "0-3538-1166-1", Genero.NOVELA, "Fernando", 220);
+		catalogo.add(libro);
+		libro = new Libro("Odisea", "1-4568-2116-2", Genero.NOVELA, "Homero", 350);
+		catalogo.add(libro);
+		libro = new Libro("Brandewijn", "4-3348-13466-5", Genero.FICCION, "Juan", 150);
+		catalogo.add(libro);
+		libro = new Libro("annabelle", "2-2238-1556-6", Genero.FICCION, "Warren", 165);
+		catalogo.add(libro);
 	}
 
 	private static void alta(ArrayList<Libro> catalogo) {
@@ -189,9 +213,17 @@ public class Main {
 	}
 
 	private static void ordenarLibrosAlfabetico(ArrayList<Libro> catalogo) {
-		// catalogo.sort
-		// 1. Titulo - Orden alfabetico, ignorar mayusculas y minusculas.
+
 		System.out.println("-- Ordenados por orden alfabetico --");
+		Collections.sort(catalogo, new Comparator<Libro>() {
+			   public int compare(Libro obj1, Libro obj2) {
+			      return obj1.getTitulo().compareToIgnoreCase(obj2.getTitulo());
+			   }
+		});
+
+		for(Libro libro: catalogo){
+		    System.out.println(libro.toString());
+		}
 	}
 
 	private static void ordenarLibrosNumeroPaginas(ArrayList<Libro> catalogo) {
@@ -236,8 +268,6 @@ public class Main {
 		String autor = datos[3];
 		Integer paginas = Integer.parseInt(datos[4]);
 
-		// Celestina:0-3538-1166-1:novela:Fernando:150
-		// Odisea:0-4568-2116-2:novela:Homero:250
 		libro = new Libro(titulo, isbn, genero, autor, paginas);
 
 		return libro;

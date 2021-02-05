@@ -107,14 +107,19 @@ public class Libro implements Comparable {
 	@Override
 	public int compareTo(Object o) {// CompareTo ignore case
 
-		if(!(o instanceof Libro)) {
-			throw new ClassCastException("El objeto introducido no es valido");
-		} else {
+		int validador = 1;
+
+		if(o instanceof String) {
 			Libro libro = (Libro) o;
+
+			if ((this.titulo).equalsIgnoreCase(libro.titulo)) {
+				validador = 0;
+			}
+		} else {
+			throw new ClassCastException("El objeto introducido no es valido");
 			// Titulo - Orden alfabetico, ignorar mayusculas y minusculas.
-			// Buscar un metodo para comparar de la clase String.
 		}
-		return 1;
+		return validador;
 	}
 	
 	@Override
