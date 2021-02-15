@@ -89,7 +89,7 @@ public class Main {
 		
 		libro = new Libro("Celestina", "0-3538-1166-1", Genero.NOVELA, "Fernando", 220);
 		catalogo.add(libro);
-		libro = new Libro("Odisea", "1-4568-2116-2", Genero.NOVELA, "Homero", 350);
+		libro = new Libro("Odisea", "1-4568-21AB-2", Genero.NOVELA, "Homero", 350);
 		catalogo.add(libro);
 		libro = new Libro("Brandewijn", "4-3348-13466-5", Genero.FICCION, "Juan", 150);
 		catalogo.add(libro);
@@ -141,20 +141,11 @@ public class Main {
 
 		Libro libro = new Libro();
 		libro.setIsbn(opcion);
+		int i = catalogo.indexOf(libro);
 
-		// Recorremos todo el catalogo buscando algun libro con el ISBN indicado.
-		for (int i = 0; i < catalogo.size(); i++) {
-			iguales = libro.equals(catalogo.get(i));
-
-			// Si son iguales lo/s mostramos por pantalla.
-			if (iguales) {
-				System.out.println(i + " - " + catalogo.get(i));
-				sinresultado = false;
-			}
-		}
-		
-		// Comprobamos si se ha obtenido algun resultado en la busqueda.
-		if (sinresultado) {
+		if (i >= 0) {
+			System.out.println(i + " - " + catalogo.get(i));
+		} else {
 			System.out.println("No hay ningun libro que coincida con ese ISBN.");
 		}
 	}
