@@ -5,7 +5,6 @@ package clases;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -202,11 +201,7 @@ public class Main {
 	private static void ordenarLibrosAlfabetico(ArrayList<Libro> catalogo) {
 
 		System.out.println("-- Ordenados por orden alfabetico --");
-		Collections.sort(catalogo, new Comparator<Libro>() {
-			   public int compare(Libro obj1, Libro obj2) {
-			      return obj1.getTitulo().compareToIgnoreCase(obj2.getTitulo());
-			   }
-		});
+		Collections.sort(catalogo);
 
 		for(Libro libro: catalogo){
 		    System.out.println(libro.toString());
@@ -214,14 +209,9 @@ public class Main {
 	}
 
 	private static void ordenarLibrosNumeroPaginas(ArrayList<Libro> catalogo) {
-		// 2. Una vez hecho el primero, ordenar por numero de paginas. (compare(Object
-		// a, Object b))
+
 		System.out.println("-- Ordenados por numero de paginas --");
-		Collections.sort(catalogo, new Comparator<Libro>() {
-			   public int compare(Libro obj1, Libro obj2) {
-			      return obj1.getPaginas().compareTo(obj2.getPaginas());
-			   }
-		});
+		Collections.sort(catalogo, new Libro());
 
 		for(Libro libro: catalogo){
 		    System.out.println(libro.toString());

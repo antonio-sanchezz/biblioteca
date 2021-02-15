@@ -1,15 +1,17 @@
 package clases;
 
-public class Libro implements Comparable {
-	
+import java.util.Comparator;
+
+public class Libro implements Comparable<Libro>, Comparator<Libro> {
+
 	private String titulo;
 	private String isbn;
 	private Genero genero;
 	private String autor;
 	private Integer paginas;
-	
+
 	public Libro() {
-		
+
 	}
 
 	/**
@@ -96,51 +98,51 @@ public class Libro implements Comparable {
 	public void setPaginas(Integer paginas) {
 		this.paginas = paginas;
 	}
-	
+
 	/**
 	 * @return devuelve la siguiente cadena "Titulo ISBN Genero Autor Paginas".
 	 */
 	public String toString() {
-		return "Titulo: " + titulo + " ISBN: " + isbn +  " Genero: " + genero + " Autor: " + autor + " Paginas: " + paginas;
+		return "Titulo: " + titulo + " ISBN: " + isbn + " Genero: " + genero + " Autor: " + autor + " Paginas: "
+				+ paginas;
 	}
 
 	@Override
-	public int compareTo(Object o) {// CompareTo ignore case
+	public int compareTo(Libro o) {// CompareTo ignore case
 
 		int validador = 1;
 
-		if(o instanceof String) {
-			Libro libro = (Libro) o;
-
-			if ((this.titulo).equalsIgnoreCase(libro.titulo)) {
-				validador = 0;
-			}
-		} else {
-			throw new ClassCastException("El objeto introducido no es valido");
-			// Titulo - Orden alfabetico, ignorar mayusculas y minusculas.
+		if ((this.titulo).equalsIgnoreCase(o.titulo)) {
+			validador = 0;
 		}
+
 		return validador;
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 
 		boolean validador = false;
 
-		if(!(o instanceof Libro)) {
+		if (!(o instanceof Libro)) {
 			throw new ClassCastException("El objeto introducido no es valido");
 		} else {
 			Libro libro = (Libro) o;
 			if (this == o) {
 				validador = true;
 			} else {
-			// Comprobamos si los ISBN son iguales, ignorando mayusculas y minusculas.
+				// Comprobamos si los ISBN son iguales, ignorando mayusculas y minusculas.
 				if ((this.isbn).equalsIgnoreCase(libro.isbn)) {
 					validador = true;
 				}
 			}
 		}
-        return validador;
+		return validador;
+	}
+
+	@Override
+	public int compare(Libro o1, Libro o2) {
+		return o1.paginas.compareTo(o2.paginas);
 	}
 
 }
