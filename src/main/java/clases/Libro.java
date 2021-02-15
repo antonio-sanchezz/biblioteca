@@ -131,9 +131,13 @@ public class Libro implements Comparable {
 			throw new ClassCastException("El objeto introducido no es valido");
 		} else {
 			Libro libro = (Libro) o;
-			// Comprobamos si los ISBN son iguales, ignorando mayusculas y minusculas.
-			if ((this.isbn).equalsIgnoreCase(libro.isbn)) {
+			if (this == o) {
 				validador = true;
+			} else {
+			// Comprobamos si los ISBN son iguales, ignorando mayusculas y minusculas.
+				if ((this.isbn).equalsIgnoreCase(libro.isbn)) {
+					validador = true;
+				}
 			}
 		}
         return validador;
