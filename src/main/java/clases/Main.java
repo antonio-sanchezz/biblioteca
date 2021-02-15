@@ -117,7 +117,7 @@ public class Main {
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("¿Que libro quiere borrar? Indique el indice.");
 		int opcion = teclado.nextInt();
-
+		opcion = opcion - 1;
 		// Eliminamos el indice dado.
 		catalogo.remove(opcion);
 
@@ -139,7 +139,8 @@ public class Main {
 		int i = catalogo.indexOf(libro);
 
 		if (i >= 0) {
-			System.out.println(i + " - " + catalogo.get(i));
+			int orden = i + 1;
+			System.out.println(orden + " - " + catalogo.get(i));
 		} else {
 			System.out.println("No hay ningun libro que coincida con ese ISBN.");
 		}
@@ -220,7 +221,8 @@ public class Main {
 
 	private static void listarLibros(ArrayList<Libro> catalogo) {
 		for (int i = 0; i < catalogo.size(); i++) {
-			System.out.println(i + " - " + catalogo.get(i));
+			int orden = i + 1;
+			System.out.println(orden + " - " + catalogo.get(i));
 		}
 	}
 
