@@ -130,11 +130,6 @@ public class Main {
 	 */
 	private static void buscarLibros(ArrayList<Libro> catalogo) {
 
-		// Nos indicara que resultados coinciden con la busqueda (true).
-		boolean iguales = false;
-		// Nos indicara si se ha encontrado algun resultado (false);
-		boolean sinresultado = true;
-
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("¿Que libro quiere buscar? Indique el ISBN.");
 		String opcion = teclado.nextLine();
