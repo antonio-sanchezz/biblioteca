@@ -3,6 +3,8 @@
  */
 package clases;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
@@ -37,6 +39,9 @@ public class Main {
 			case 6:
 				librosDePrueba(catalogo);
 				break;
+			case 7:
+				guardarLibros(catalogo);
+				break;
 			default:
 				break;
 			}
@@ -55,9 +60,10 @@ public class Main {
 			System.out.println("4. Búsqueda de Libros");
 			System.out.println("5. Ordenacion de Libros");
 			System.out.println("6. Introducir Libros de prueba");
+			System.out.println("7. Guardar archivo");
 			System.out.println("Introduce la opcion:");
 
-			opcion = leerOpcion(6);
+			opcion = leerOpcion(7);
 
 		} while (opcion <= 0);
 
@@ -265,5 +271,23 @@ public class Main {
 		Scanner teclado = new Scanner(System.in);
 		opcion = teclado.nextLine();
 		return opcion;
+	}
+	
+	private static void guardarLibros(ArrayList<Libro> catalogo) {
+		Scanner teclado = new Scanner(System.in);
+		System.out.println("¿Que nombre le quiere poner al archivo?");
+		String opcion = teclado.nextLine();
+		
+	    try {
+	        File myObj = new File(opcion + ".txt");
+	        if (myObj.createNewFile()) {
+	          System.out.println("File created: " + myObj.getName());
+	        } else {
+	          System.out.println("File already exists.");
+	        }
+	      } catch (IOException e) {
+	        System.out.println("EL archivo no se ha guardado correctamente.");
+	        e.printStackTrace();
+	      }
 	}
 }
