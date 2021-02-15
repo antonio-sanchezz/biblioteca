@@ -217,6 +217,15 @@ public class Main {
 		// 2. Una vez hecho el primero, ordenar por numero de paginas. (compare(Object
 		// a, Object b))
 		System.out.println("-- Ordenados por numero de paginas --");
+		Collections.sort(catalogo, new Comparator<Libro>() {
+			   public int compare(Libro obj1, Libro obj2) {
+			      return obj1.getPaginas().compareTo(obj2.getPaginas());
+			   }
+		});
+
+		for(Libro libro: catalogo){
+		    System.out.println(libro.toString());
+		}
 	}
 
 	private static void listarLibros(ArrayList<Libro> catalogo) {
