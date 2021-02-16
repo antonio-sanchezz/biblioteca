@@ -295,7 +295,7 @@ public class Main {
 		String opcion = teclado.nextLine();
 
 		try {
-			File file = new File(opcion + ".txt");
+			File file = new File(opcion);
 			FileOutputStream fileout = new FileOutputStream(file);
 			BufferedWriter BWriter = new BufferedWriter(new OutputStreamWriter(fileout));
 
