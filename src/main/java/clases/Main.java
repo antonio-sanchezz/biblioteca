@@ -3,11 +3,16 @@
  */
 package clases;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
@@ -83,15 +88,16 @@ public class Main {
 
 		return opcion;
 	}
-	
+
 	/**
 	 * Nos permite añadir algunos libros automaticamente para realizar pruebas.
 	 * 
-	 * @param catalogo catalogo contiene toda la informacion de todos los libros introducidos
+	 * @param catalogo catalogo contiene toda la informacion de todos los libros
+	 *                 introducidos
 	 */
 	private static void librosDePrueba(ArrayList<Libro> catalogo) {
 		Libro libro;
-		
+
 		libro = new Libro("Celestina", "0-3538-1166-1", Genero.NOVELA, "Fernando", 220);
 		catalogo.add(libro);
 		libro = new Libro("Odisea", "1-4568-21AB-2", Genero.NOVELA, "Homero", 350);
@@ -114,11 +120,11 @@ public class Main {
 	}
 
 	private static void baja(ArrayList<Libro> catalogo) {
-		
+
 		// Mediante ISBN, puede haber varios libros con el mismo ISBN, tenerlo en cuenta
 		// a la hora de eliminarlo.
 		// indexOf(Object o)
-		
+
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("¿Que libro quiere borrar? Indique el indice.");
 		int opcion = teclado.nextInt();
@@ -189,7 +195,7 @@ public class Main {
 
 		return opcion;
 	}
-	
+
 	private static int leerOpcionOrdenar(int max) {
 		int opcion = -1;
 		try {
@@ -209,8 +215,8 @@ public class Main {
 		System.out.println("-- Ordenados por orden alfabetico --");
 		Collections.sort(catalogo);
 
-		for(Libro libro: catalogo){
-		    System.out.println(libro.toString());
+		for (Libro libro : catalogo) {
+			System.out.println(libro.toString());
 		}
 	}
 
@@ -219,8 +225,8 @@ public class Main {
 		System.out.println("-- Ordenados por numero de paginas --");
 		Collections.sort(catalogo, new Libro());
 
-		for(Libro libro: catalogo){
-		    System.out.println(libro.toString());
+		for (Libro libro : catalogo) {
+			System.out.println(libro.toString());
 		}
 	}
 
@@ -272,22 +278,39 @@ public class Main {
 		opcion = teclado.nextLine();
 		return opcion;
 	}
-	
+
 	private static void guardarLibros(ArrayList<Libro> catalogo) {
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("¿Que nombre le quiere poner al archivo?");
 		String opcion = teclado.nextLine();
-		
-	    try {
-	        File myObj = new File(opcion + ".txt");
-	        if (myObj.createNewFile()) {
-	          System.out.println("File created: " + myObj.getName());
-	        } else {
-	          System.out.println("File already exists.");
-	        }
-	      } catch (IOException e) {
-	        System.out.println("EL archivo no se ha guardado correctamente.");
-	        e.printStackTrace();
-	      }
+		/*
+		 * try { File myObj = new File(opcion + ".txt"); if (myObj.createNewFile()) {
+		 * System.out.println("Archivo creado: " + myObj.getName()); } else {
+		 * System.out.println("File already exists."); } } catch (IOException e) {
+		 * System.out.println("El archivo no se ha guardado correctamente.");
+		 * e.printStackTrace(); }
+		 */
+
+		try {
+
+			File file = new File(opcion + ".txt");
+			FileOutputStream fileout = new FileOutputStream(file);
+			BufferedWriter myWriter = new BufferedWriter(new OutputStreamWriter(fileout));
+
+			// titulo,isbn,genero,autor,num_paginas
+			Iterator<Libro> itCatalogo = catalogo.iterator();
+			while (itCatalogo.hasNext()) {
+				Libro libros = itCatalogo.next();
+				myWriter.write(libros.getTitulo() + "," + libros.getIsbn() + "," + libros.getGenero() + ","
+						+ libros.getAutor() + "," + libros.getPaginas());
+				myWriter.newLine();
+			}
+
+			myWriter.close();
+			System.out.println("El archivo ha sido modificado correctamente.");
+		} catch (IOException e) {
+			System.out.println("Ha ocurrido un error.");
+			e.printStackTrace();
+		}
 	}
 }
