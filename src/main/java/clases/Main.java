@@ -3,10 +3,12 @@
  */
 package clases;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -42,10 +44,16 @@ public class Main {
 				ordenarLibros(catalogo);
 				break;
 			case 6:
-				librosDePrueba(catalogo);
+				guardarLibros(catalogo);
 				break;
 			case 7:
-				guardarLibros(catalogo);
+				cargarLibros(catalogo);
+				break;
+			case 8:
+				vaciarLibros(catalogo);
+				break;
+			case 9:
+				librosDePrueba(catalogo);
 				break;
 			default:
 				break;
@@ -64,11 +72,13 @@ public class Main {
 			System.out.println("3. Baja de Libros");
 			System.out.println("4. Búsqueda de Libros");
 			System.out.println("5. Ordenacion de Libros");
-			System.out.println("6. Introducir Libros de prueba");
-			System.out.println("7. Guardar archivo");
+			System.out.println("6. Guardar catalogo en un fichero");
+			System.out.println("7. Cargar libros de un fichero");
+			System.out.println("8. Vaciar catalogo");
+			System.out.println("9. Introducir Libros de prueba");
 			System.out.println("Introduce la opcion:");
 
-			opcion = leerOpcion(7);
+			opcion = leerOpcion(9);
 
 		} while (opcion <= 0);
 
@@ -283,34 +293,83 @@ public class Main {
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("¿Que nombre le quiere poner al archivo?");
 		String opcion = teclado.nextLine();
-		/*
-		 * try { File myObj = new File(opcion + ".txt"); if (myObj.createNewFile()) {
-		 * System.out.println("Archivo creado: " + myObj.getName()); } else {
-		 * System.out.println("File already exists."); } } catch (IOException e) {
-		 * System.out.println("El archivo no se ha guardado correctamente.");
-		 * e.printStackTrace(); }
-		 */
 
 		try {
-
 			File file = new File(opcion + ".txt");
 			FileOutputStream fileout = new FileOutputStream(file);
-			BufferedWriter myWriter = new BufferedWriter(new OutputStreamWriter(fileout));
+			BufferedWriter BWriter = new BufferedWriter(new OutputStreamWriter(fileout));
 
-			// titulo,isbn,genero,autor,num_paginas
 			Iterator<Libro> itCatalogo = catalogo.iterator();
 			while (itCatalogo.hasNext()) {
 				Libro libros = itCatalogo.next();
-				myWriter.write(libros.getTitulo() + "," + libros.getIsbn() + "," + libros.getGenero() + ","
+
+				// titulo,isbn,genero,autor,num_paginas
+				BWriter.write(libros.getTitulo() + "," + libros.getIsbn() + "," + libros.getGenero() + ","
 						+ libros.getAutor() + "," + libros.getPaginas());
-				myWriter.newLine();
+				BWriter.newLine();
 			}
 
-			myWriter.close();
+			BWriter.close();
 			System.out.println("El archivo ha sido modificado correctamente.");
 		} catch (IOException e) {
 			System.out.println("Ha ocurrido un error.");
 			e.printStackTrace();
 		}
+	}
+	
+	private static void cargarLibros(ArrayList<Libro> catalogo) {
+		Scanner teclado = new Scanner(System.in);
+		System.out.println("¿Que archivo desea cargar?");
+		String opcion = teclado.nextLine();
+
+	    File file = new File(opcion);
+	    if (file.exists()) {
+	    	FileReader frfile = null;
+			try {
+				frfile = new FileReader (opcion);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	BufferedReader brfile = new BufferedReader(frfile);
+
+	         // Lectura del fichero
+	         String linea;
+	         try {
+				while((linea = brfile.readLine()) != null) {
+					// Procesar la entrada.
+					Libro libro = procesarCarga(linea);
+					// Crear el libro con los datos de la entrada.
+					catalogo.add(libro);
+				 }
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	// Cargamos los libros del fichero.
+	    	
+	    } else {
+	      System.out.println("El archivo indicado no existe.");
+	    }
+	}
+	
+	private static Libro procesarCarga(String entrada) {
+		Libro libro = null;
+
+		String[] datos = entrada.split(",");
+
+		String titulo = datos[0];
+		String isbn = datos[1];
+		Genero genero = Genero.getGenero(datos[2]);
+		String autor = datos[3];
+		Integer paginas = Integer.parseInt(datos[4]);
+
+		libro = new Libro(titulo, isbn, genero, autor, paginas);
+
+		return libro;
+	}
+	
+	private static void vaciarLibros(ArrayList<Libro> catalogo) {
+		catalogo.clear();
 	}
 }
