@@ -108,15 +108,9 @@ public class Libro implements Comparable<Libro>, Comparator<Libro> {
 	}
 
 	@Override
-	public int compareTo(Libro o) {// CompareTo ignore case
+	public int compareTo(Libro o) {
 
-		int validador = 1;
-
-		if ((this.titulo).equalsIgnoreCase(o.titulo)) {
-			validador = 0;
-		}
-
-		return validador;
+		return (this.titulo).compareToIgnoreCase(o.titulo);
 	}
 
 	@Override
@@ -143,6 +137,10 @@ public class Libro implements Comparable<Libro>, Comparator<Libro> {
 	@Override
 	public int compare(Libro o1, Libro o2) {
 		return o1.paginas.compareTo(o2.paginas);
+	}
+
+	public String getText() {
+		return titulo + "," + isbn + "," + genero + "," + autor + "," + paginas;
 	}
 
 }
