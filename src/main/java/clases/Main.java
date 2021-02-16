@@ -304,8 +304,7 @@ public class Main {
 				Libro libros = itCatalogo.next();
 
 				// titulo,isbn,genero,autor,num_paginas
-				BWriter.write(libros.getTitulo() + "," + libros.getIsbn() + "," + libros.getGenero() + ","
-						+ libros.getAutor() + "," + libros.getPaginas());
+				BWriter.write(libros.getText());
 				BWriter.newLine();
 			}
 
