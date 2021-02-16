@@ -168,12 +168,9 @@ public class Main {
 	}
 
 	private static void ordenarLibros(ArrayList<Libro> catalogo) {
-		while (true) {
 			int opcion = menuOrdenar();
 			switch (opcion) {
 			case 1:
-				// TODO Alta de Libro
-				// titulo:isbn:genero:autor:paginas
 				ordenarLibrosAlfabetico(catalogo);
 				break;
 			case 2:
@@ -185,7 +182,6 @@ public class Main {
 			default:
 				break;
 			}
-		}
 	}
 
 	private static int menuOrdenar() {
